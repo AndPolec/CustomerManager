@@ -12,7 +12,7 @@ namespace CustomerManager.Domain.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public Address Address { get; set; }
-        public List<PhoneNumber> PhoneNumbers { get; set; }
+        public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public List<ContactPerson> ContactPersons { get; set; }
         public ClientType ClientType { get; set; }
