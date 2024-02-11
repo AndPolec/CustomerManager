@@ -7,7 +7,7 @@ namespace CustomerManager.Domain.Models
         public int Id { get; set; }
         public Product Product { get; set; }
         public int Quantity { get; set; }
-        public Unit Unit { get; set; }
-        public int ReorderPeriod { get; set; }
+        public UnitOfMeasure Unit { get; set; }
+        public PurchaseFrequency PurchaseFrequency { get; set; }
     }
 }

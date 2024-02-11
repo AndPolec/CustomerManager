@@ -7,7 +7,7 @@ using CustomerManager.Domain.Enums;
 
 namespace CustomerManager.Domain.Models
 {
-    public class Customer : AuditableModel
+    public class Customer : AuditableModel // stworzyc klasę bazową dystrybutor/restauracja?
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -15,7 +15,8 @@ namespace CustomerManager.Domain.Models
         public List<PhoneNumber> PhoneNumbers { get; set; }
         public string Email { get; set; }
         public List<ContactPerson> ContactPersons { get; set; }
-        public BusinessType BusinessType { get; set; }
+        public ClientType ClientType { get; set; }
+        public FoodServiceType FoodServiceType { get; set; }
         public SalesData SalesData { get; set; }
         public int AccountManagerId { get; set; }
         public bool IsActive { get; set; }
