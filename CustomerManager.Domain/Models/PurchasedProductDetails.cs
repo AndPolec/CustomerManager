@@ -2,7 +2,7 @@
 
 namespace CustomerManager.Domain.Models
 {
-    public class ActivePurchaseProductDetails : AuditableModel
+    public class PurchasedProductDetails : AuditableModel
     {
         public int Id { get; set; }
         public Product Product { get; set; }

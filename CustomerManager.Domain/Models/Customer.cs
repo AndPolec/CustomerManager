@@ -17,7 +17,7 @@ namespace CustomerManager.Domain.Models
         public List<ContactPerson> ContactPersons { get; set; }
         public ClientType ClientType { get; set; }
         public FoodServiceType FoodServiceType { get; set; }
-        public SalesData SalesData { get; set; }
+        public CustomerSalesData SalesData { get; set; }
         public int AccountManagerId { get; set; }
         public bool IsActive { get; set; }
     }

@@ -13,5 +13,7 @@ namespace CustomerManager.Domain.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public UserType UserType { get; set; }
+        public List<Customer>? Customers { get; set; }
+        public List<SalesCall>? SalesCalls { get; set; }
     }
 }
