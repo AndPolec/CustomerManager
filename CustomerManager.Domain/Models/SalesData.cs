@@ -3,7 +3,8 @@
     public class SalesData
     {
         public int Id { get; set; }
-        public int DistributorId { get; set; }
-        public List<ActiveProduct> ActiveProducts { get; set; }
+        public int? DistributorId { get; set; }
+        public List<ActivePurchaseProductDetails> ActiveProducts { get; set; }
+        public string Notes { get; set; }
     }
 }
