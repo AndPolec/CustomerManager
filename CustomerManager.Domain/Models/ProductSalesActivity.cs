@@ -11,5 +11,6 @@ namespace CustomerManager.Domain.Models
         public int? Quantity { get; set; }
         public UnitOfMeasure? UOM { get; set; }
         public PurchaseFrequency? PurchaseFrequency { get; set; }
+        public int SalesCallId { get; set; }
     }
 }

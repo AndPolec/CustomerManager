@@ -1,6 +1,6 @@
 ﻿namespace CustomerManager.Domain.Models
 {
-    public class Address
+    public class Address : AuditableModel
     {
         public int Id { get; set; }
         public string Street { get; set; }

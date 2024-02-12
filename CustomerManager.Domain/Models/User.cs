@@ -7,7 +7,7 @@ using CustomerManager.Domain.Enums;
 
 namespace CustomerManager.Domain.Models
 {
-    public class User
+    public class User : AuditableModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

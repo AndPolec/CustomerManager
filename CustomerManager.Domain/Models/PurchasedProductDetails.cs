@@ -12,5 +12,6 @@ namespace CustomerManager.Domain.Models
         public DateTime StartPurchaseDate { get; set; }
         public DateTime EndPurchaseDate { get; set; }
         public bool IsActive { get; set; }
+        public int CustomerSalesDataId { get; set; }
     }
 }
