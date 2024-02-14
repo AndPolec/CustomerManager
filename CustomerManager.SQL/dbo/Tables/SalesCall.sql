@@ -2,7 +2,7 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Objective] NVARCHAR(3000) NULL, 
-    [Result] NCHAR(3000) NULL, 
+    [Result] NVARCHAR(3000) NULL, 
     [Date] DATETIME2 NOT NULL DEFAULT getdate(), 
     [CustomerId] INT NOT NULL,
     [UserId] INT NOT NULL, 
