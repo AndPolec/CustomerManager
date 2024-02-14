@@ -9,7 +9,7 @@ namespace CustomerManager.Domain.Models
         public SalesActivityType SalesActivityType { get; set; }
         public SalesActivityResult SalesActivityResult { get; set; }
         public int? Quantity { get; set; }
-        public UnitOfMeasure? UOM { get; set; }
+        public UnitOfMeasure? UnitOfMeasure { get; set; }
         public PurchaseFrequency? PurchaseFrequency { get; set; }
         public int SalesCallId { get; set; }
     }

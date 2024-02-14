@@ -7,6 +7,8 @@
 	[Email] NVARCHAR(100) NULL, 
     [ContactRole] INT NOT NULL, 
     [CustomerId] INT NOT NULL, 
+	[CreatedDate] DATETIME2 NOT NULL DEFAULT getdate(), 
+    [ModifiedDate] DATETIME2 NOT NULL DEFAULT getdate(),
     CONSTRAINT [FK_ContactPerson_Customer] FOREIGN KEY ([CustomerId]) REFERENCES [Customer]([Id]), 
 
 

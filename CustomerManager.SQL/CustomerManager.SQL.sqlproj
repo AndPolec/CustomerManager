@@ -67,8 +67,8 @@
     <Build Include="dbo\Tables\CustomerSalesData.sql" />
     <Build Include="dbo\Tables\ContactPerson.sql" />
     <Build Include="dbo\Tables\PurchasedProductDetails.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="CustomerManager.SQL.refactorlog" />
+    <Build Include="dbo\Tables\User.sql" />
+    <Build Include="dbo\Tables\SalesCall.sql" />
+    <Build Include="dbo\Tables\ProductSalesActivity.sql" />
   </ItemGroup>
 </Project>

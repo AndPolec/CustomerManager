@@ -10,5 +10,8 @@
     [CreatedDate] DATETIME2 NOT NULL DEFAULT getdate(), 
     [ModifiedDate] DATETIME2 NOT NULL DEFAULT getdate(), 
     [CustomerSalesDataId] INT NOT NULL,
-    CONSTRAINT [FK_PurchasedProductDetails_CustomerSalesData] FOREIGN KEY ([CustomerSalesDataId]) REFERENCES [CustomerSalesData] ([Id])
+    [ProductId] INT NOT NULL, 
+    CONSTRAINT [FK_PurchasedProductDetails_CustomerSalesData] FOREIGN KEY ([CustomerSalesDataId]) REFERENCES [CustomerSalesData] ([Id]),
+    CONSTRAINT [FK_PurchasedProductDetails_Product] FOREIGN KEY ([ProductId]) REFERENCES [Product] ([Id])
+
 )
