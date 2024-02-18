@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[CustomerSalesData]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [Notes] NVARCHAR(5000) NULL, 
+    [Notes] NVARCHAR(4000) NULL, 
     [CustomerId] INT NOT NULL UNIQUE, 
     [DistributorId] INT NULL,
     [CreatedDate] DATETIME2 NOT NULL DEFAULT getdate(), 
