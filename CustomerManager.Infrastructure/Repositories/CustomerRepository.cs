@@ -1,6 +1,11 @@
 ﻿using CustomerManager.Domain.Interfaces;
+using CustomerManager.Domain.Models;
+using Dapper;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +14,28 @@ namespace CustomerManager.Infrastructure.Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {
-        public CustomerRepository()
+        private readonly IConfiguration _config;
+
+        public CustomerRepository(IConfiguration configuration)
         {
-            
+            _config = configuration;
         }
+
+        public async Task<List<Customer>> GetAllAsync(int customerOwnerId)
+        {
+            using var db = new SqlConnection(_config.GetConnectionString("Default"));
+
+            var customers = await db.QueryAsync<Customer, Address, Customer>("spCustomer_GetAll",
+                (customer, address) => { customer.Address = address; return customer; }, new { CustomerOwnerId = customerOwnerId }, commandType: CommandType.StoredProcedure);
+            
+            var contactPersons = await db.QueryAsync<ContactPerson>("spContactPerson_GetAll", new { CustomerOwnerId = customerOwnerId }, commandType: CommandType.StoredProcedure);
+
+            foreach (var customer in customers) 
+            {
+                customer.ContactPersons = contactPersons.Where(cp => cp.CustomerId == customer.Id).ToList();
+            }
+
+            return customers.ToList();
+        } 
     }
 }

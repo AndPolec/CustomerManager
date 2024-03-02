@@ -1,8 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[sp_Customer_GetAll]
+﻿CREATE PROCEDURE [dbo].[spCustomer_GetAll]
+@CustomerOwnerId int
 AS
 BEGIN
-	select * 
+	select c.*, a.* 
 	from dbo.Customer c
-	join dbo.[Address] a on a.CustomerId = c.Id
-	join dbo.ContactPerson cp on cp.CustomerId = c.Id;
+	left join dbo.[Address] a on a.CustomerId = c.Id
+	where c.ClientOwnerId = @ClientOwnerId
+	order by c.Name asc;
 END

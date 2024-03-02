@@ -15,6 +15,7 @@
         Catering = 10,
         DeliveryService = 11,
         Cafe = 12,
-        Other = 13
+        Hotel = 13,
+        Other = 14
     }
 }

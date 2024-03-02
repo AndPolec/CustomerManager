@@ -9,6 +9,6 @@
     [FoodServiceType] INT NOT NULL,
     [CreatedDate] DATETIME2 NOT NULL DEFAULT getdate(), 
     [ModifiedDate] DATETIME2 NOT NULL DEFAULT getdate(), 
-    [AccountManagerId] INT NULL,
-    CONSTRAINT [Customer_User] FOREIGN KEY ([AccountManagerId]) REFERENCES [User] (Id)
+    [CustomerOwnerId] INT NULL,
+    CONSTRAINT [Customer_User] FOREIGN KEY ([CustomerOwnerId]) REFERENCES [User] (Id)
 )
