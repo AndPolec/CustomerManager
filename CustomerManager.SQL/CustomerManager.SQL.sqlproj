@@ -70,7 +70,7 @@
     <Build Include="dbo\Tables\User.sql" />
     <Build Include="dbo\Tables\SalesCall.sql" />
     <Build Include="dbo\Tables\ProductSalesActivity.sql" />
-    <Build Include="dbo\StoredProcedures\sp_Customer_GetAll.sql" />
+    <Build Include="dbo\StoredProcedures\spCustomer_GetAll.sql" />
     <Build Include="dbo\StoredProcedures\spContactPerson_GetAll.sql" />
   </ItemGroup>
   <ItemGroup>

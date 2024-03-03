@@ -21,20 +21,15 @@ namespace CustomerManager.Infrastructure.Repositories
             _config = configuration;
         }
 
-        public async Task<List<Customer>> GetAllAsync(int customerOwnerId)
+        public async Task<List<Customer>> GetAllAsync(int customerOwnerId, string searchString, int pageSize, int pageNumber)
         {
             using var db = new SqlConnection(_config.GetConnectionString("Default"));
 
             var customers = await db.QueryAsync<Customer, Address, Customer>("spCustomer_GetAll",
-                (customer, address) => { customer.Address = address; return customer; }, new { CustomerOwnerId = customerOwnerId }, commandType: CommandType.StoredProcedure);
+                (customer, address) => { customer.Address = address; return customer; },
+                new { CustomerOwnerId = customerOwnerId, SearchString = searchString, PageSize = pageSize, PageNumber = pageNumber },
+                commandType: CommandType.StoredProcedure);
             
-            var contactPersons = await db.QueryAsync<ContactPerson>("spContactPerson_GetAll", new { CustomerOwnerId = customerOwnerId }, commandType: CommandType.StoredProcedure);
-
-            foreach (var customer in customers) 
-            {
-                customer.ContactPersons = contactPersons.Where(cp => cp.CustomerId == customer.Id).ToList();
-            }
-
             return customers.ToList();
         } 
     }
