@@ -4,6 +4,6 @@ namespace CustomerManager.Application.Interfaces
 {
     public interface ICustomerService
     {
-        Task<List<CustomerForListDTO>> GetAllCustomersForListAsync(int customerOwnerId, string searchString, int pageSize, int pageNumber);
+        Task<CustomerListDTO> GetAllCustomersForListAsync(int customerOwnerId, string searchString, int pageSize, int pageNumber);
     }
 }

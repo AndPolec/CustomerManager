@@ -21,7 +21,7 @@ namespace CustomerManager.Infrastructure.Repositories
             _config = configuration;
         }
 
-        public async Task<List<Customer>> GetAllAsync(int customerOwnerId, string searchString, int pageSize, int pageNumber)
+        public async Task<(List<Customer> Customers, int TotalCustomersFound)> GetAllAsync(int customerOwnerId, string searchString, int pageSize, int pageNumber)
         {
             using IDbConnection db = new SqlConnection(_config.GetConnectionString("Default"));
 
@@ -30,8 +30,13 @@ namespace CustomerManager.Infrastructure.Repositories
                 map: (customer, address) => { customer.Address = address; return customer; },
                 param: new { CustomerOwnerId = customerOwnerId, SearchString = searchString, PageSize = pageSize, PageNumber = pageNumber },
                 commandType: CommandType.StoredProcedure);
-            
-            return customers.ToList();
+
+            var totalCustomersFound = await db.QuerySingleAsync<int>(
+                sql: "dbo.spCustomer_GetTotalCountForSearch",
+                param: new { CustomerOwnerId = customerOwnerId, SearchString = searchString },
+                commandType: CommandType.StoredProcedure);
+
+            return (customers.ToList(), totalCustomersFound);
         } 
     }
 }

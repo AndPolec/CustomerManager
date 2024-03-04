@@ -23,13 +23,14 @@ namespace CustomerManager.Application.Services
 
         public async Task<CustomerListDTO> GetAllCustomersForListAsync(int customerOwnerId, string searchString, int pageSize, int pageNumber)
         {
-            var customers = await _customerRepo.GetAllAsync(customerOwnerId, searchString, pageSize, pageNumber);
+            var result = await _customerRepo.GetAllAsync(customerOwnerId, searchString, pageSize, pageNumber);
             var customerListDto = new CustomerListDTO()
             {
-                Customers = _customerMapper.MapToCustomerForListDTO(customers),
+                Customers = _customerMapper.MapToCustomerForListDTO(result.Customers),
                 SearchString = searchString,
                 PageSize = pageSize,
-                PageNumber = pageNumber
+                PageNumber = pageNumber,
+                TotalCustomersFound = result.TotalCustomersFound
             };
 
             return customerListDto;
