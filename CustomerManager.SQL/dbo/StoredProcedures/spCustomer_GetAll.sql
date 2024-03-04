@@ -11,6 +11,6 @@ BEGIN
 	where c.CustomerOwnerId = @CustomerOwnerId 
 		and (@SearchString is null or c.Name like '%' + @SearchString + '%')
 	order by c.Name asc
-	offset (@PageSize-1)*@PageSize rows
+	offset (@PageNumber-1)*@PageSize rows
 	fetch next @PageSize rows only;
 END

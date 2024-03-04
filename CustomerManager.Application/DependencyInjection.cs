@@ -1,4 +1,5 @@
 ﻿using CustomerManager.Application.Interfaces;
+using CustomerManager.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,8 @@ namespace CustomerManager.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<ICustomerService, ICustomerService>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            return services;
         }
     }
 }
