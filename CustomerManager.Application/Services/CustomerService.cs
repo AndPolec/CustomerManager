@@ -27,9 +27,10 @@ namespace CustomerManager.Application.Services
                 var customerDTO = new CustomerForListDTO()
                 {
                     Id = customer.Id,
-                    Email = customer.Email,
                     Name = customer.Name,
+                    Email = customer.Email,
                     PhoneNumber = customer.PhoneNumber,
+                    ClientType = customer.ClientType.ToString(),
                     Address = new AddressDTO()
                     {
                         Id = customer.Address.Id,

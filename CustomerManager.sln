@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManager.API", "CustomerManager.API\CustomerManager.API.csproj", "{AC98058C-EA7B-4DE0-8CA7-11AB133C2B03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerManager.API", "CustomerManager.API\CustomerManager.API.csproj", "{AC98058C-EA7B-4DE0-8CA7-11AB133C2B03}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{CD73AF9C-2C8C-4717-AB17-69717ADDED17}"
 EndProject
@@ -17,15 +17,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8628D516
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{413930A4-8A7D-4A4B-8299-45A2B1BE48B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManager.Application", "CustomerManager.Application\CustomerManager.Application.csproj", "{47D5391E-88DE-4A4D-A9EA-ADF82CA85569}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerManager.Application", "CustomerManager.Application\CustomerManager.Application.csproj", "{47D5391E-88DE-4A4D-A9EA-ADF82CA85569}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManager.Domain", "CustomerManager.Domain\CustomerManager.Domain.csproj", "{71AC4541-BEB6-4FFC-A670-984D12AE1080}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerManager.Domain", "CustomerManager.Domain\CustomerManager.Domain.csproj", "{71AC4541-BEB6-4FFC-A670-984D12AE1080}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManager.Infrastructure", "CustomerManager.Infrastructure\CustomerManager.Infrastructure.csproj", "{C4DC71F8-E897-413D-9309-166DB37E6B6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerManager.Infrastructure", "CustomerManager.Infrastructure\CustomerManager.Infrastructure.csproj", "{C4DC71F8-E897-413D-9309-166DB37E6B6A}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CustomerManager.SQL", "CustomerManager.SQL\CustomerManager.SQL.sqlproj", "{C5D814EC-B26C-434D-815D-4A6C315B127B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManager.Tests", "CustomerManager.Tests\CustomerManager.Tests.csproj", "{E687AC38-0D10-408A-ADBC-40F264CC5A02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerManager.Tests", "CustomerManager.Tests\CustomerManager.Tests.csproj", "{E687AC38-0D10-408A-ADBC-40F264CC5A02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
