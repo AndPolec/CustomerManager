@@ -1,5 +1,6 @@
 ﻿using CustomerManager.Application.DTOs.Customer;
 using CustomerManager.Application.Interfaces;
+using CustomerManager.Application.Mappers;
 using CustomerManager.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,39 +13,26 @@ namespace CustomerManager.Application.Services
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepo;
+        private readonly ICustomerMapper _customerMapper;
 
-        public CustomerService(ICustomerRepository customerRepo)
+        public CustomerService(ICustomerRepository customerRepo, ICustomerMapper customerMapper)
         {
             _customerRepo = customerRepo;
+            _customerMapper = customerMapper;
         }
 
-        public async Task<List<CustomerForListDTO>> GetAllCustomersForListAsync(int customerOwnerId, string searchString, int pageSize, int pageNumber)
+        public async Task<CustomerListDTO> GetAllCustomersForListAsync(int customerOwnerId, string searchString, int pageSize, int pageNumber)
         {
             var customers = await _customerRepo.GetAllAsync(customerOwnerId, searchString, pageSize, pageNumber);
-            var customersDTO = new List<CustomerForListDTO>();
-            foreach (var customer in customers)
+            var customerListDto = new CustomerListDTO()
             {
-                var customerDTO = new CustomerForListDTO()
-                {
-                    Id = customer.Id,
-                    Name = customer.Name,
-                    Email = customer.Email,
-                    PhoneNumber = customer.PhoneNumber,
-                    ClientType = customer.ClientType.ToString(),
-                    Address = new AddressDTO()
-                    {
-                        Id = customer.Address.Id,
-                        BuildingNumber = customer.Address.BuildingNumber,
-                        FlatNumber = customer.Address.FlatNumber,
-                        Street = customer.Address.Street,
-                        City = customer.Address.City,
-                        ZipCode = customer.Address.ZipCode
-                    }
-                };
-                customersDTO.Add(customerDTO);
-            }
+                Customers = _customerMapper.MapToCustomerForListDTO(customers),
+                SearchString = searchString,
+                PageSize = pageSize,
+                PageNumber = pageNumber
+            };
 
-            return customersDTO;
+            return customerListDto;
         }
     }
 }
