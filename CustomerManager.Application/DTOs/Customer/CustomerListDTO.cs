@@ -12,6 +12,7 @@ namespace CustomerManager.Application.DTOs.Customer
         public string SearchString { get; set; }
         public int PageSize { get; set; }
         public int PageNumber { get; set; }
+        public int TotalPages { get; set; }
         public int TotalCustomersFound { get; set; }
     }
 }

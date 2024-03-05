@@ -30,6 +30,7 @@ namespace CustomerManager.Application.Services
                 SearchString = searchString,
                 PageSize = pageSize,
                 PageNumber = pageNumber,
+                TotalPages = (int)Math.Ceiling((double)result.TotalCustomersFound/pageSize),
                 TotalCustomersFound = result.TotalCustomersFound
             };
 

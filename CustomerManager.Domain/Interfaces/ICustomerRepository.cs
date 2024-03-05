@@ -9,6 +9,6 @@ namespace CustomerManager.Domain.Interfaces
 {
     public interface ICustomerRepository
     {
-        Task<(List<Customer> Customers, int TotalCountForSearch)> GetAllAsync(int customerOwnerId, string searchString, int pageSize, int pageNumber);
+        Task<(List<Customer> Customers, int TotalCustomersFound)> GetAllAsync(int customerOwnerId, string searchString, int pageSize, int pageNumber);
     }
 }

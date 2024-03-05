@@ -1,4 +1,5 @@
 ﻿using CustomerManager.Application.Interfaces;
+using CustomerManager.Application.Mappers;
 using CustomerManager.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,6 +15,8 @@ namespace CustomerManager.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddScoped<ICustomerService, CustomerService>();
+
+            services.AddScoped<ICustomerMapper, CustomerMapper>();
             return services;
         }
     }
