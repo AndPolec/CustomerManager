@@ -10,6 +10,8 @@ builder.Services.AddApplication();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Logging.AddFile("Logs/Log-{Date}.txt");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

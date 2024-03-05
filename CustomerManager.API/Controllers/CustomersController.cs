@@ -8,10 +8,12 @@ namespace CustomerManager.API.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
+        private readonly ILogger<CustomersController> _logger;
         private readonly ICustomerService _customerService;
 
-        public CustomersController(ICustomerService customerService)
+        public CustomersController(ILogger<CustomersController> logger, ICustomerService customerService)
         {
+            _logger = logger;
             _customerService = customerService;
         }
 
