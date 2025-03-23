@@ -68,5 +68,7 @@
     <Build Include="dbo\Tables\Identity\AspNetUserRoles.sql" />
     <Build Include="dbo\Tables\Identity\AspNetUsers.sql" />
     <Build Include="dbo\Tables\Identity\AspNetUserTokens.sql" />
+    <Build Include="dbo\Tables\JobTitle.sql" />
+    <Build Include="dbo\Tables\UserProfile.sql" />
   </ItemGroup>
 </Project>
