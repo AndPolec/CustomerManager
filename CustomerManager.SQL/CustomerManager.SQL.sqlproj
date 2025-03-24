@@ -70,5 +70,13 @@
     <Build Include="dbo\Tables\Identity\AspNetUserTokens.sql" />
     <Build Include="dbo\Tables\JobTitle.sql" />
     <Build Include="dbo\Tables\UserProfile.sql" />
+    <Build Include="dbo\Tables\CustomerType.sql" />
+    <Build Include="dbo\Tables\CustomerPotential.sql" />
+    <Build Include="dbo\Tables\CustomerActivity.sql" />
+    <Build Include="dbo\Tables\Customer.sql" />
+    <Build Include="dbo\Tables\ContactPerson.sql" />
+    <Build Include="dbo\Tables\ContactPersonRole.sql" />
+    <Build Include="dbo\Tables\Address.sql" />
+    <Build Include="dbo\Tables\CustomerNote.sql" />
   </ItemGroup>
 </Project>

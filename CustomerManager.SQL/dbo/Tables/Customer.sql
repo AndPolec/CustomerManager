@@ -1,0 +1,24 @@
+﻿CREATE TABLE [dbo].[Customer]
+(
+	[Id] INT IDENTITY NOT NULL,
+    [Email] NVARCHAR(256) NULL,
+    [Phone] NVARCHAR(20) NULL,
+    [CompanyName] NVARCHAR(255),
+    [CustomerTypeId] INT NOT NULL,
+    [CustomerPotentialId] INT NOT NULL,
+    [CustomerActivityId] INT NOT NULL,
+    [CreatedAt] DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    [CreatedBy] NVARCHAR(450) NULL,
+    [UpdatedAt] DATETIME2 NULL,
+    [UpdatedBy] NVARCHAR(450) NULL,
+    CONSTRAINT PK_Customer_Id PRIMARY KEY ([Id]),
+    CONSTRAINT FK_Customer_CustomerType_CustomerTypeId FOREIGN KEY ([CustomerTypeId]) REFERENCES [CustomerType]([Id]) ON DELETE NO ACTION,
+    CONSTRAINT FK_Customer_CustomerPotential_CustomerPotentialId FOREIGN KEY ([CustomerPotentialId]) REFERENCES [CustomerPotential]([Id]) ON DELETE NO ACTION,
+    CONSTRAINT FK_Customer_CustomerActivity_CustomerActivityId FOREIGN KEY ([CustomerActivityId]) REFERENCES [CustomerActivity]([Id]) ON DELETE NO ACTION,
+    CONSTRAINT FK_Customer_AspNetUsers_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL,
+    CONSTRAINT FK_Customer_AspNetUsers_UpdatedBy FOREIGN KEY ([UpdatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL
+)
+
+GO
+CREATE INDEX IX_Customer_CompanyName ON Customer(CompanyName);
+
