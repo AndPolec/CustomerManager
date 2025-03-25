@@ -78,5 +78,11 @@
     <Build Include="dbo\Tables\ContactPersonRole.sql" />
     <Build Include="dbo\Tables\Address.sql" />
     <Build Include="dbo\Tables\CustomerNote.sql" />
+    <Build Include="dbo\Tables\UnitOfMeasure.sql" />
+    <Build Include="dbo\Tables\ProductCategory.sql" />
+    <Build Include="dbo\Tables\Product.sql" />
+    <Build Include="dbo\Tables\ProductUnit.sql" />
+    <Build Include="dbo\Tables\ProductTag.sql" />
+    <Build Include="dbo\Tables\Product_ProductTag.sql" />
   </ItemGroup>
 </Project>
