@@ -89,5 +89,7 @@
     <Build Include="dbo\Tables\PurchaseFrequency.sql" />
     <Build Include="dbo\Tables\SalesCall.sql" />
     <Build Include="dbo\Tables\SalesCallStatus.sql" />
+    <Build Include="dbo\Tables\SalesCallProduct.sql" />
+    <Build Include="dbo\Tables\CustomerProduct.sql" />
   </ItemGroup>
 </Project>

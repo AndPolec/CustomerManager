@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[SalesCallProductStatus]
+﻿CREATE TABLE [dbo].[SalesCallProductDecisionStatus]
 (
 	[Id] INT IDENTITY NOT NULL,
     [StatusName] NVARCHAR(50) NOT NULL,
