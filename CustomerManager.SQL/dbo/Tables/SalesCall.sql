@@ -25,3 +25,15 @@
     CONSTRAINT FK_SalesCall_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL,
     CONSTRAINT FK_SalesCall_UpdatedBy FOREIGN KEY ([UpdatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL
 )
+
+GO
+CREATE TRIGGER TRG_SalesCall_SetUpdatedAt ON [dbo].[SalesCall]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE sc
+    SET sc.UpdatedAt = SYSDATETIME()
+    FROM [dbo].[SalesCall] sc
+    INNER JOIN inserted i ON sc.Id = i.Id;
+END;

@@ -20,3 +20,15 @@
 
 GO
 CREATE UNIQUE INDEX IX_Product_SKU ON Product(SKU)
+
+GO
+CREATE TRIGGER TRG_Product_SetUpdatedAt ON [dbo].[Product]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE p
+    SET p.UpdatedAt = SYSDATETIME()
+    FROM [dbo].[Product] p
+    INNER JOIN inserted i ON p.Id = i.Id;
+END;

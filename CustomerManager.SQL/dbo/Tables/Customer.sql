@@ -22,3 +22,14 @@
 GO
 CREATE INDEX IX_Customer_CompanyName ON Customer(CompanyName);
 
+GO
+CREATE TRIGGER TRG_Customer_SetUpdatedAt ON [dbo].[Customer]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE c
+    SET c.UpdatedAt = SYSDATETIME()
+    FROM [dbo].[Customer] c
+    INNER JOIN inserted i ON c.Id = i.Id;
+END;

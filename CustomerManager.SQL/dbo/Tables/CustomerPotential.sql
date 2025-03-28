@@ -10,3 +10,15 @@
     CONSTRAINT PK_CustomerPotential_Id PRIMARY KEY ([Id]),
     CONSTRAINT FK_CustomerPotential_AspNetUsers_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL
 )
+
+GO
+CREATE TRIGGER TRG_CustomerPotential_SetUpdatedAt ON [dbo].[CustomerPotential]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE cpot
+    SET cpot.UpdatedAt = SYSDATETIME()
+    FROM [dbo].[CustomerPotential] cpot
+    INNER JOIN inserted i ON cpot.Id = i.Id;
+END;

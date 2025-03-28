@@ -17,3 +17,15 @@
     CONSTRAINT FK_UserProfile_JobTitle_JobTitleId FOREIGN KEY ([JobTitleId]) REFERENCES [JobTitle]([Id]) ON DELETE SET NULL,
     CONSTRAINT FK_UserProfile_AspNetUsers_UpdatedBy FOREIGN KEY ([UpdatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL
 )
+
+GO
+CREATE TRIGGER TRG_UserProfile_SetUpdatedAt ON [dbo].[UserProfile]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE up
+    SET up.UpdatedAt = SYSDATETIME()
+    FROM [dbo].[UserProfile] up
+    INNER JOIN inserted i ON up.Id = i.Id;
+END;

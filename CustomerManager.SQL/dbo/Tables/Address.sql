@@ -17,3 +17,15 @@
     CONSTRAINT FK_Address_AspNetUsers_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL,
     CONSTRAINT FK_Address_AspNetUsers_UpdatedBy FOREIGN KEY ([UpdatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL
 )
+
+GO
+CREATE TRIGGER TRG_Address_SetUpdatedAt ON [dbo].[Address]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE a
+    SET a.UpdatedAt = SYSDATETIME()
+    FROM [dbo].[Address] a
+    INNER JOIN inserted i ON a.Id = i.Id;
+END;

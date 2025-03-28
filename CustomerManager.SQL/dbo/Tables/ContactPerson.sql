@@ -19,3 +19,15 @@
 )
 GO
 CREATE NONCLUSTERED INDEX IX_ContactPerson_Customer_CustomerId ON ContactPerson(CustomerId);
+
+GO
+CREATE TRIGGER TRG_ContactPerson_SetUpdatedAt ON [dbo].[ContactPerson]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE cp
+    SET cp.UpdatedAt = SYSDATETIME()
+    FROM [dbo].[ContactPerson] cp
+    INNER JOIN inserted i ON cp.Id = i.Id;
+END;

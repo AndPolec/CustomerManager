@@ -3,7 +3,10 @@
 	[Id] INT IDENTITY NOT NULL,
     [TagName] NVARCHAR(100) NOT NULL,
     [Description] NVARCHAR(500) NULL,
-    CONSTRAINT PK_ProductTag_Id PRIMARY KEY ([Id])
+    [CreatedAt] DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    [CreatedBy] NVARCHAR(450) NULL,
+    CONSTRAINT PK_ProductTag_Id PRIMARY KEY ([Id]),
+    CONSTRAINT FK_ProductTag_AspNetUsers_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL
 )
 
 GO
