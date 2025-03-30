@@ -22,8 +22,8 @@
     CONSTRAINT FK_SalesCallProduct_UnitOfMeasure FOREIGN KEY ([UnitOfMeasureId]) REFERENCES [UnitOfMeasure]([Id]) ON DELETE NO ACTION,
     CONSTRAINT FK_SalesCallProduct_DecisionStatus FOREIGN KEY ([SalesDecisionStatusId]) REFERENCES [SalesCallProductDecisionStatus]([Id]) ON DELETE NO ACTION,
     CONSTRAINT FK_SalesCallProduct_Frequency FOREIGN KEY ([PurchaseFrequencyId]) REFERENCES [PurchaseFrequency]([Id]) ON DELETE NO ACTION,
-    CONSTRAINT FK_SalesCallProduct_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL,
-    CONSTRAINT FK_SalesCallProduct_UpdatedBy FOREIGN KEY ([UpdatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL
+    CONSTRAINT FK_SalesCallProduct_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE NO ACTION,
+    CONSTRAINT FK_SalesCallProduct_UpdatedBy FOREIGN KEY ([UpdatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE NO ACTION
 )
 
 GO

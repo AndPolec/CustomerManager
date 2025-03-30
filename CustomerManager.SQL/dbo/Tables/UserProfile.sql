@@ -12,10 +12,10 @@
 	[UpdatedAt] DATETIME2 NULL,
     [UpdatedBy] NVARCHAR(450) NULL,
     CONSTRAINT PK_UserProfile_Id PRIMARY KEY ([Id]),
-    CONSTRAINT FK_UserProfile_AspNetUsers_Id FOREIGN KEY ([Id]) REFERENCES [AspNetUsers]([Id]) ON DELETE CASCADE,
-    CONSTRAINT FK_UserProfile_AspNetUsers_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL,
+    CONSTRAINT FK_UserProfile_AspNetUsers_Id FOREIGN KEY ([Id]) REFERENCES [AspNetUsers]([Id]) ON DELETE NO ACTION,
+    CONSTRAINT FK_UserProfile_AspNetUsers_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE NO ACTION,
     CONSTRAINT FK_UserProfile_JobTitle_JobTitleId FOREIGN KEY ([JobTitleId]) REFERENCES [JobTitle]([Id]) ON DELETE SET NULL,
-    CONSTRAINT FK_UserProfile_AspNetUsers_UpdatedBy FOREIGN KEY ([UpdatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL
+    CONSTRAINT FK_UserProfile_AspNetUsers_UpdatedBy FOREIGN KEY ([UpdatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE NO ACTION
 )
 
 GO

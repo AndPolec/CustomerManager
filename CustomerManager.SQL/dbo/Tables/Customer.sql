@@ -15,8 +15,8 @@
     CONSTRAINT FK_Customer_CustomerType_CustomerTypeId FOREIGN KEY ([CustomerTypeId]) REFERENCES [CustomerType]([Id]) ON DELETE NO ACTION,
     CONSTRAINT FK_Customer_CustomerPotential_CustomerPotentialId FOREIGN KEY ([CustomerPotentialId]) REFERENCES [CustomerPotential]([Id]) ON DELETE NO ACTION,
     CONSTRAINT FK_Customer_CustomerActivity_CustomerActivityId FOREIGN KEY ([CustomerActivityId]) REFERENCES [CustomerActivity]([Id]) ON DELETE NO ACTION,
-    CONSTRAINT FK_Customer_AspNetUsers_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL,
-    CONSTRAINT FK_Customer_AspNetUsers_UpdatedBy FOREIGN KEY ([UpdatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL
+    CONSTRAINT FK_Customer_AspNetUsers_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE NO ACTION,
+    CONSTRAINT FK_Customer_AspNetUsers_UpdatedBy FOREIGN KEY ([UpdatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE NO ACTION
 )
 
 GO

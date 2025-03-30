@@ -6,5 +6,5 @@
     [CreatedAt] DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     [CreatedBy] NVARCHAR(450) NULL,
     CONSTRAINT PK_ContactPersonRole_Id PRIMARY KEY CLUSTERED ([Id]),
-    CONSTRAINT FK_ContactPersonRole_AspNetUsers_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL
+    CONSTRAINT FK_ContactPersonRole_AspNetUsers_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE NO ACTION
 )

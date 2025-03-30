@@ -14,8 +14,8 @@
     [UpdatedBy] NVARCHAR(450) NULL,
     CONSTRAINT PK_Address_Id PRIMARY KEY ([Id]),
     CONSTRAINT FK_Address_Customer_CustomerId FOREIGN KEY ([CustomerId]) REFERENCES [Customer]([Id]) ON DELETE CASCADE,
-    CONSTRAINT FK_Address_AspNetUsers_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL,
-    CONSTRAINT FK_Address_AspNetUsers_UpdatedBy FOREIGN KEY ([UpdatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL
+    CONSTRAINT FK_Address_AspNetUsers_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE NO ACTION,
+    CONSTRAINT FK_Address_AspNetUsers_UpdatedBy FOREIGN KEY ([UpdatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE NO ACTION
 )
 
 GO

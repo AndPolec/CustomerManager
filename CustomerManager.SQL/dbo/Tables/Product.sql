@@ -14,8 +14,8 @@
     CONSTRAINT PK_Product_Id PRIMARY KEY ([Id]),
     CONSTRAINT FK_Product_ProductCategory_CategoryId FOREIGN KEY ([CategoryId]) REFERENCES [ProductCategory]([Id]) ON DELETE NO ACTION,
     CONSTRAINT FK_Product_UnitOfMeasure_BaseUnit FOREIGN KEY ([BaseUnitId]) REFERENCES [UnitOfMeasure]([Id]) ON DELETE NO ACTION,
-    CONSTRAINT FK_Product_AspNetUsers_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL,
-    CONSTRAINT FK_Product_AspNetUsers_UpdatedBy FOREIGN KEY ([UpdatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE SET NULL
+    CONSTRAINT FK_Product_AspNetUsers_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE NO ACTION,
+    CONSTRAINT FK_Product_AspNetUsers_UpdatedBy FOREIGN KEY ([UpdatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE NO ACTION
 )
 
 GO
