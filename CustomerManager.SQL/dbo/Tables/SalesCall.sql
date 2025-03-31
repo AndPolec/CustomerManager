@@ -18,7 +18,7 @@
     [UpdatedBy] NVARCHAR(450) NULL,
     CONSTRAINT PK_SalesCall_Id PRIMARY KEY ([Id]),
     CONSTRAINT FK_SalesCall_Customer FOREIGN KEY ([CustomerId]) REFERENCES [Customer]([Id]) ON DELETE CASCADE,
-    CONSTRAINT FK_SalesCall_ContactPerson FOREIGN KEY ([ContactPersonId]) REFERENCES [ContactPerson]([Id]) ON DELETE SET NULL,
+    CONSTRAINT FK_SalesCall_ContactPerson FOREIGN KEY ([ContactPersonId]) REFERENCES [ContactPerson]([Id]) ON DELETE NO ACTION,
     CONSTRAINT FK_SalesCall_User FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers]([Id]) ON DELETE NO ACTION,
     CONSTRAINT FK_SalesCall_ContactType FOREIGN KEY ([ContactTypeId]) REFERENCES [SalesCallContactType]([Id]) ON DELETE NO ACTION,
     CONSTRAINT FK_SalesCall_Status FOREIGN KEY ([StatusId]) REFERENCES [SalesCallStatus]([Id]) ON DELETE NO ACTION,

@@ -7,6 +7,7 @@
     [CustomerTypeId] INT NOT NULL,
     [CustomerPotentialId] INT NOT NULL,
     [CustomerActivityId] INT NOT NULL,
+    [IsActive] BIT NOT NULL DEFAULT 1,
     [CreatedAt] DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     [CreatedBy] NVARCHAR(450) NULL,
     [UpdatedAt] DATETIME2 NULL,
