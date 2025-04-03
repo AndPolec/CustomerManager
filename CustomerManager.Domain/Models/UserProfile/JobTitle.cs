@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CustomerManager.Domain.Models.UserProfile.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CustomerManager.Domain.Models.User
+namespace CustomerManager.Domain.Models.UserProfile
 {
     public class JobTitle
     {
@@ -16,11 +17,12 @@ namespace CustomerManager.Domain.Models.User
 
         public JobTitle(int id, string titleName, string? description = null, string? createdBy = null)
         {
-            if(string.IsNullOrWhiteSpace(titleName))
+            if (string.IsNullOrWhiteSpace(titleName))
             {
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(titleName));
+                throw new InvalidJobTitleException("Job title name cannot be empty.");
             }
 
+            Id = id;
             TitleName = titleName;
             Description = description;
             CreatedAt = DateTime.UtcNow;
