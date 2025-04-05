@@ -10,7 +10,6 @@
     <Folder Include="Interfaces\" />
     <Folder Include="Models\Dictionaries\" />
     <Folder Include="Models\Customer\" />
-    <Folder Include="Models\Product\" />
     <Folder Include="Models\SalesCall\" />
   </ItemGroup>
 
