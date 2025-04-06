@@ -48,7 +48,6 @@ namespace CustomerManager.Domain.Models.UserProfile
             if (email != null)
                 Email = CleanAndValidateEmail(email);
             
-
             if (phoneNumber != null)
                 phoneNumber = CleanAndValidatePhoneNumber(phoneNumber);
             
@@ -63,8 +62,6 @@ namespace CustomerManager.Domain.Models.UserProfile
             CreatedBy = createdBy;
             JobTitle = jobTitle;
         }
-
-        
 
         public void UpdateName(string firstName, string lastName, string? updatedBy = null)
         {
