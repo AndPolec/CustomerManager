@@ -11,20 +11,14 @@ namespace CustomerManager.Domain.Models.Product
     public class ProductUnit
     {
         public int Id { get; private set; }
-
         public int ProductId { get; private set; }
-
         public int UnitId { get; private set; }
-
         public decimal ConversionFactor { get; private set; }
-
         public bool IsDefault { get; private set; }
-
         public DateTime CreatedAt { get; private set; }
-
         public string? CreatedBy { get; private set; }
 
-        public ProductUnit(int productId, int unitId, decimal conversionFactor, bool isDefault = false, string? createdBy = null)
+        internal ProductUnit(int productId, int unitId, decimal conversionFactor, bool isDefault = false, string? createdBy = null)
         {
             if (conversionFactor <= 0)
                 throw new InvalidProductUnitException("Conversion factor must be greater than zero.");
@@ -37,12 +31,12 @@ namespace CustomerManager.Domain.Models.Product
             CreatedBy = createdBy;
         }
 
-        public void SetDefault(bool isDefault)
+        internal void SetDefault(bool isDefault)
         {
             IsDefault = isDefault;
         }
 
-        public void UpdateConversionFactor(decimal newFactor)
+        internal void UpdateConversionFactor(decimal newFactor)
         {
             if (newFactor <= 0)
                 throw new InvalidProductUnitException("Conversion factor must be greater than zero.");

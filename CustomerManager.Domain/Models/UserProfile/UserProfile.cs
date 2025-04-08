@@ -12,25 +12,15 @@ namespace CustomerManager.Domain.Models.UserProfile
     public class UserProfile
     {
         public string Id { get; private set; }
-
         public string FirstName { get; private set; }
-
         public string LastName { get; private set; }
-
         public string? Email { get; private set; }
-
         public string? PhoneNumber { get; private set; }
-
         public bool IsActive { get; private set; }
-
         public DateTime CreatedAt { get; private set; }
-
         public string? CreatedBy { get; private set; }
-
         public DateTime? UpdatedAt { get; private set; }
-
         public string? UpdatedBy { get; private set; }
-
         public  JobTitle? JobTitle { get; private set; }
 
         public UserProfile(string id, string firstName, string lastName, string? email = null, 
