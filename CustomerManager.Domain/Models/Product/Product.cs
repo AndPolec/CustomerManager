@@ -28,7 +28,7 @@ namespace CustomerManager.Domain.Models.Product
         private readonly List<int> _tagsIds;
         public IReadOnlyCollection<int> Tags => _tagsIds.AsReadOnly();
 
-        public Product(int id, string sku, string name,  int categoryId, int baseUnitId, string? description = null, bool isActive = true, string? createdBy = null)
+        public Product(string sku, string name,  int categoryId, int baseUnitId, string? description = null, bool isActive = true, string? createdBy = null)
         {
             if(string.IsNullOrWhiteSpace(sku))
                 throw new InvalidProductException("SKU cannot be empty.");
@@ -39,7 +39,6 @@ namespace CustomerManager.Domain.Models.Product
             if (baseUnitId <= 0)
                 throw new InvalidProductException("Base unit ID must be greater than zero.");
 
-            Id = id;
             Sku = sku;
             Name = name;
             CategoryId = categoryId;
@@ -160,6 +159,14 @@ namespace CustomerManager.Domain.Models.Product
                 throw new InvalidProductException("Tag is not in list.");
 
             _tagsIds.Remove(tagId);
+        }
+
+        internal void SetId(int id)
+        {
+            if (id <= 0)
+                throw new InvalidProductException("ID must be greater than zero.");
+
+            Id = id;
         }
 
         private void Touch(string? updatedBy)

@@ -15,12 +15,11 @@ namespace CustomerManager.Domain.Models.Product
         public DateTime CreatedAt { get; private set; }
         public string? CreatedBy { get; private set; }
 
-        public ProductTag(int id, string name, string? description = null, string? createdBy = null)
+        public ProductTag(string name, string? description = null, string? createdBy = null)
         {
             if (String.IsNullOrWhiteSpace(name))
                 throw new InvalidProductTagException("Tag name cannot be empty.");
 
-            Id = id;
             Name = name;
             Description = description;
             CreatedBy = createdBy;
@@ -37,6 +36,14 @@ namespace CustomerManager.Domain.Models.Product
         public void UpdateDescription(string? newDescription)
         {
             Description = newDescription;
+        }
+
+        internal void SetId(int id)
+        {
+            if (id <= 0)
+                throw new InvalidProductTagException("ID must be greater than zero.");
+
+            Id = id;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CustomerManager.Domain.Models.UserProfile.Exceptions;
+﻿using CustomerManager.Domain.Models.Product.Exceptions;
+using CustomerManager.Domain.Models.UserProfile.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,13 @@ namespace CustomerManager.Domain.Models.UserProfile
         public DateTime CreatedAt { get; private set; }
         public string? CreatedBy { get; private set; }
 
-        public JobTitle(int id, string name, string? description = null, string? createdBy = null)
+        public JobTitle(string name, string? description = null, string? createdBy = null)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 throw new InvalidJobTitleException("Job title name cannot be empty.");
             }
 
-            Id = id;
             Name = name;
             Description = description;
             CreatedAt = DateTime.UtcNow;
@@ -32,6 +32,14 @@ namespace CustomerManager.Domain.Models.UserProfile
         public void UpdateDescription(string? newDescription)
         {
             Description = newDescription;
+        }
+
+        internal void SetId(int id)
+        {
+            if (id <= 0)
+                throw new InvalidJobTitleException("ID must be greater than zero.");
+
+            Id = id;
         }
     }
 }

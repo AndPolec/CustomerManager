@@ -1,15 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Models\Customer\" />
-    <Folder Include="Models\SalesCall\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Interfaces\" />
+		<Folder Include="Models\Customer\" />
+		<Folder Include="Models\SalesCall\" />
+	</ItemGroup>
+    
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>CustomerManager.Infrastructure</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
 
 </Project>

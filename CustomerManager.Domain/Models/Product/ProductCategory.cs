@@ -15,12 +15,11 @@ namespace CustomerManager.Domain.Models.Product
         public DateTime CreatedAt { get; private set; }
         public string? CreatedBy { get; private set; }
 
-        public ProductCategory(int id, string name, string? description, string? createdBy = null)
+        public ProductCategory(string name, string? description, string? createdBy = null)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new InvalidProductCategoryException("Category name cannot be empty.");
 
-            Id = id;
             Name = name;
             Description = description;
             CreatedAt = DateTime.UtcNow;
@@ -37,6 +36,14 @@ namespace CustomerManager.Domain.Models.Product
         public void UpdateDescription(string? description)
         {
             Description = description;
+        }
+
+        internal void SetId(int id)
+        {
+            if (id <= 0)
+                throw new InvalidProductCategoryException("ID must be greater than zero.");
+
+            Id = id;
         }
     }
 }

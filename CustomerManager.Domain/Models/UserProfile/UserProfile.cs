@@ -1,4 +1,5 @@
-﻿using CustomerManager.Domain.Models.UserProfile.Exceptions;
+﻿using CustomerManager.Domain.Models.Product.Exceptions;
+using CustomerManager.Domain.Models.UserProfile.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,12 +24,9 @@ namespace CustomerManager.Domain.Models.UserProfile
         public string? UpdatedBy { get; private set; }
         public  JobTitle? JobTitle { get; private set; }
 
-        public UserProfile(string id, string firstName, string lastName, string? email = null, 
+        public UserProfile(string firstName, string lastName, string? email = null, 
             string? phoneNumber = null, bool? isActive = true, JobTitle? jobTitle = null, string? createdBy = null)
         {
-            if (string.IsNullOrWhiteSpace(id))
-                throw new InvalidUserProfileException("User ID is required.");
-
             if (string.IsNullOrWhiteSpace(firstName))
                 throw new InvalidUserProfileException("First name is required.");
 
@@ -41,8 +39,6 @@ namespace CustomerManager.Domain.Models.UserProfile
             if (phoneNumber != null)
                 phoneNumber = CleanAndValidatePhoneNumber(phoneNumber);
             
-
-            Id = id;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
@@ -109,6 +105,14 @@ namespace CustomerManager.Domain.Models.UserProfile
             IsActive = true;
             UpdatedAt = DateTime.UtcNow;
             UpdatedBy = updatedBy;
+        }
+
+        internal void SetId(string id)
+        {
+            if (String.IsNullOrWhiteSpace(id))
+                throw new InvalidUserProfileException("ID is invalid.");
+
+            Id = id;
         }
 
         private string CleanAndValidateEmail(string email)
