@@ -132,20 +132,5 @@ namespace CustomerManager.Domain.Models.UserProfile
                 throw new InvalidUserProfileException("Invalid email format.");
             }
         }
-
-        private string CleanAndValidatePhoneNumber(string phoneNumber)
-        {
-            var cleaned = phoneNumber.Replace(" ", "").Replace("-", "");
-
-            if (!IsValidPhoneNumber(cleaned))
-                throw new InvalidUserProfileException("Invalid phone number.");
-
-            return cleaned;
-        }
-
-        private bool IsValidPhoneNumber(string phoneNumber)
-        {
-            return Regex.IsMatch(phoneNumber, @"^\+?[1-9]\d{6,14}$");
-        }
     }
 }

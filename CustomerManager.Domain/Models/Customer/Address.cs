@@ -31,7 +31,7 @@ namespace CustomerManager.Domain.Models.Customer
 
         public string? UpdatedBy { get; private set; }
 
-        public Address(
+        internal Address(
            string street,
            string buildingNumber,
            string city,
