@@ -1,4 +1,5 @@
-﻿using CustomerManager.Domain.Models.Product.Exceptions;
+﻿using CustomerManager.Domain.Common.Validators;
+using CustomerManager.Domain.Models.Product.Exceptions;
 using CustomerManager.Domain.Models.UserProfile.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -24,8 +25,14 @@ namespace CustomerManager.Domain.Models.UserProfile
         public string? UpdatedBy { get; private set; }
         public  JobTitle? JobTitle { get; private set; }
 
-        public UserProfile(string firstName, string lastName, string? email = null, 
-            string? phoneNumber = null, bool? isActive = true, JobTitle? jobTitle = null, string? createdBy = null)
+        public UserProfile(
+            string firstName, 
+            string lastName, 
+            string? email = null, 
+            string? phoneNumber = null, 
+            bool? isActive = true, 
+            JobTitle? jobTitle = null, 
+            string? createdBy = null)
         {
             if (string.IsNullOrWhiteSpace(firstName))
                 throw new InvalidUserProfileException("First name is required.");
@@ -34,10 +41,10 @@ namespace CustomerManager.Domain.Models.UserProfile
                 throw new InvalidUserProfileException("Last name is required.");
 
             if (email != null)
-                Email = CleanAndValidateEmail(email);
+                email = EmailValidator.CleanAndValidate(email,() => new InvalidUserProfileException("Invalid email format."));
             
             if (phoneNumber != null)
-                phoneNumber = CleanAndValidatePhoneNumber(phoneNumber);
+                phoneNumber = PhoneNumberValidator.CleanAndValidate(phoneNumber, () => new InvalidUserProfileException("Invalid phone number format."));
             
             FirstName = firstName;
             LastName = lastName;
@@ -67,12 +74,12 @@ namespace CustomerManager.Domain.Models.UserProfile
         {
             if (email != null)
             {
-                Email = CleanAndValidateEmail(email);
+                email = EmailValidator.CleanAndValidate(email, () => new InvalidUserProfileException("Invalid email format."));
             }
 
             if (phoneNumber != null)
             {
-                phoneNumber = CleanAndValidatePhoneNumber(phoneNumber);
+                phoneNumber = PhoneNumberValidator.CleanAndValidate(phoneNumber, () => new InvalidUserProfileException("Invalid phone number format."));
             }
 
             Email = email;
@@ -113,24 +120,6 @@ namespace CustomerManager.Domain.Models.UserProfile
                 throw new InvalidUserProfileException("ID is invalid.");
 
             Id = id;
-        }
-
-        private string CleanAndValidateEmail(string email)
-        {
-            var trimmed = email.Trim();
-
-            try
-            {
-                var mailAddress = new MailAddress(trimmed);
-                if (mailAddress.Address != trimmed)
-                    throw new InvalidUserProfileException("Invalid email format.");
-
-                return trimmed;
-            }
-            catch
-            {
-                throw new InvalidUserProfileException("Invalid email format.");
-            }
         }
     }
 }

@@ -4,7 +4,7 @@
     [ProductId] INT NOT NULL,
     [UnitOfMeasureId] INT NOT NULL,
     [Quantity] DECIMAL(10,2) NOT NULL,
-    [PurchaseFrequencyId] INT NULL,
+    [PurchaseFrequencyId] INT NOT NULL,
     [StartDate] DATE NOT NULL,
     [EndDate] DATE NULL,
     [IsActive] BIT NOT NULL DEFAULT 1,

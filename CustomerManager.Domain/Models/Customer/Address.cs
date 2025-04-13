@@ -10,25 +10,15 @@ namespace CustomerManager.Domain.Models.Customer
     public class Address
     {
         public int Id { get; private set; }
-
         public string Street { get; private set; }
-
         public string BuildingNumber { get; private set; } 
-
         public string? FlatNumber { get; private set; }
-
         public string City { get; private set; }
-
         public string ZipCode { get; private set; } 
-
         public string Country { get; private set; } 
-
         public DateTime CreatedAt { get; private set; }
-
         public string? CreatedBy { get; private set; }
-
-        public DateTime? UpdatedAt { get; private set; }
-
+        public DateTime? UpdatedAt { get; set; }
         public string? UpdatedBy { get; private set; }
 
         internal Address(
