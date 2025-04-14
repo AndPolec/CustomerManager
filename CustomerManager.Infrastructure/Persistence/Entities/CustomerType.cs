@@ -15,9 +15,6 @@ public partial class CustomerType
 
     public string? CreatedBy { get; set; }
 
-    public DateTime? UpdatedAt { get; set; }
-
-    public string? UpdatedBy { get; set; }
 
     public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
 }
