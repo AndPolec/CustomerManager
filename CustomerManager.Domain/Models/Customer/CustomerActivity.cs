@@ -1,4 +1,4 @@
-﻿using CustomerManager.Domain.Common.Exceptions;
+﻿using CustomerManager.Domain.Models.Customer.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
