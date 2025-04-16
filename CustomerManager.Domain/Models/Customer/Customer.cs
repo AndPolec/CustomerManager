@@ -1,4 +1,5 @@
-﻿using CustomerManager.Domain.Models.Customer.Exceptions;
+﻿using CustomerManager.Domain.Common.Validators;
+using CustomerManager.Domain.Models.Customer.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace CustomerManager.Domain.Models.Customer
     {
         public int Id { get; private set; }
         public string? Email { get; private set; }
-        public string? Phone { get; private set; }
+        public string? PhoneNumber { get; private set; }
         public string Name { get; private set; }
         public bool IsActive { get; private set; }
         public string AssignedUserId { get; private set; }
@@ -19,7 +20,7 @@ namespace CustomerManager.Domain.Models.Customer
         public int CustomerPotentialId { get; private set; }
         public int CustomerActivityId { get; private set; }
         public DateTime CreatedAt { get; private set; }
-        public string? CreatedBy { get; private set; }
+        public string CreatedBy { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
         public string? UpdatedBy { get; private set; }
 
@@ -36,14 +37,14 @@ namespace CustomerManager.Domain.Models.Customer
         public IReadOnlyCollection<CustomerProduct> Products => _products.AsReadOnly();
 
         public Customer(
-           string name,
-           string assignedUserId,
-           int customerTypeId,
-           int customerPotentialId,
-           int customerActivityId,
-           string? email = null,
-           string? phone = null,
-           string? createdBy = null)
+            string name,
+            string assignedUserId,
+            int customerTypeId,
+            int customerPotentialId,
+            int customerActivityId,
+            string createdBy,
+            string? email = null,
+            string? phone = null)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new InvalidCustomerException("Customer name is required.");
@@ -55,88 +56,116 @@ namespace CustomerManager.Domain.Models.Customer
                 throw new InvalidCustomerException("Customer potential ID must be greater than 0.");
             if (customerActivityId <= 0)
                 throw new InvalidCustomerException("Customer activity ID must be greater than 0.");
+            if (string.IsNullOrWhiteSpace(createdBy))
+                throw new InvalidCustomerException("CreatedBy is required.");
 
             Name = name;
             Email = email;
-            Phone = phone;
+            PhoneNumber = phone;
             AssignedUserId = assignedUserId;
             CustomerTypeId = customerTypeId;
             CustomerPotentialId = customerPotentialId;
             CustomerActivityId = customerActivityId;
-            IsActive = true;
-            CreatedAt = DateTime.UtcNow;
             CreatedBy = createdBy;
+            CreatedAt = DateTime.UtcNow;
+            IsActive = true;
         }
 
-        public void UpdateAssignedUser(string userId, string? updatedBy = null)
+        public void UpdateName(string name, string updatedBy)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new InvalidCustomerException("Name is required.");
+            Name = name;
+            Touch(updatedBy);
+        }
+
+        public void UpdateContact(string? email, string? phoneNumber, string updatedBy)
+        {
+            if (email != null)
+            {
+                email = EmailValidator.CleanAndValidate(email, () => new InvalidCustomerException("Invalid email format."));
+            }
+
+            if (phoneNumber != null)
+            {
+                phoneNumber = PhoneNumberValidator.CleanAndValidate(phoneNumber, () => new InvalidCustomerException("Invalid phone number format."));
+            }
+
+            Email = email;
+            PhoneNumber = phoneNumber;
+            Touch(updatedBy);
+        }
+
+        public void UpdateAssignedUser(string userId, string updatedBy)
         {
             if (string.IsNullOrWhiteSpace(userId))
-                throw new InvalidCustomerException("Assigned user ID cannot be empty.");
+                throw new InvalidCustomerException("Assigned user ID is required.");
 
             AssignedUserId = userId;
             Touch(updatedBy);
         }
 
-        public void UpdateName(string name, string? updatedBy = null)
-        {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new InvalidCustomerException("Name cannot be empty.");
-            Name = name.Trim();
-            Touch(updatedBy);
-        }
-
-        public void UpdateEmail(string? email, string? updatedBy = null)
-        {
-            Email = email?.Trim();
-            Touch(updatedBy);
-        }
-
-        public void UpdatePhone(string? phone, string? updatedBy = null)
-        {
-            Phone = phone?.Trim();
-            Touch(updatedBy);
-        }
-
-        public void UpdateType(int typeId, string? updatedBy = null)
+        public void UpdateType(int typeId, string updatedBy)
         {
             if (typeId <= 0)
                 throw new InvalidCustomerException("Customer type ID must be greater than 0.");
+
             CustomerTypeId = typeId;
             Touch(updatedBy);
         }
 
-        public void UpdatePotential(int potentialId, string? updatedBy = null)
+        public void UpdatePotential(int potentialId, string updatedBy)
         {
             if (potentialId <= 0)
                 throw new InvalidCustomerException("Customer potential ID must be greater than 0.");
+
             CustomerPotentialId = potentialId;
             Touch(updatedBy);
         }
 
-        public void UpdateActivity(int activityId, string? updatedBy = null)
+        public void UpdateActivity(int activityId, string updatedBy)
         {
             if (activityId <= 0)
                 throw new InvalidCustomerException("Customer activity ID must be greater than 0.");
+
             CustomerActivityId = activityId;
             Touch(updatedBy);
         }
 
-        public void Activate(string? updatedBy = null)
+        public void UpdateDetails(
+            string name,
+            string? email,
+            string? phoneNumber,
+            int typeId,
+            int potentialId,
+            int activityId,
+            string updatedBy)
+        {
+            UpdateName(name, updatedBy);
+            UpdateContact(email,phoneNumber,updatedBy);
+            UpdateType(typeId, updatedBy);
+            UpdatePotential(potentialId, updatedBy);
+            UpdateActivity(activityId, updatedBy);
+        }
+
+        public void Activate(string updatedBy)
         {
             IsActive = true;
             Touch(updatedBy);
         }
 
-        public void Deactivate(string? updatedBy = null)
+        public void Deactivate(string updatedBy)
         {
             IsActive = false;
             Touch(updatedBy);
         }
 
-        private void Touch(string? updatedBy)
+        private void Touch(string updatedBy)
         {
-            UpdatedAt = DateTime.UtcNow;
+            if (string.IsNullOrWhiteSpace(updatedBy))
+                throw new InvalidCustomerException("UpdatedBy is required.");
             UpdatedBy = updatedBy;
+            UpdatedAt = DateTime.UtcNow;
         }
     }
 }
