@@ -13,7 +13,7 @@
     [FollowUpNote] NVARCHAR(500) NULL,
     [Note] NVARCHAR(1000) NULL,
     [CreatedAt] DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
-    [CreatedBy] NVARCHAR(450) NULL,
+    [CreatedBy] NVARCHAR(450) NOT NULL,
     [UpdatedAt] DATETIME2 NULL,
     [UpdatedBy] NVARCHAR(450) NULL,
     CONSTRAINT PK_SalesCallProduct_Id PRIMARY KEY ([Id]),

@@ -9,7 +9,7 @@
     [ZipCode] NVARCHAR(20) NOT NULL,
     [Country] NVARCHAR(100) NOT NULL,
     [CreatedAt] DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
-    [CreatedBy] NVARCHAR(450) NULL,
+    [CreatedBy] NVARCHAR(450) NOT NULL,
     [UpdatedAt] DATETIME2 NULL,
     [UpdatedBy] NVARCHAR(450) NULL,
     CONSTRAINT PK_Address_Id PRIMARY KEY ([Id]),

@@ -8,7 +8,7 @@
     [BaseUnitId] INT NOT NULL,
     [IsActive] BIT NOT NULL DEFAULT 1,
     [CreatedAt] DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
-    [CreatedBy] NVARCHAR(450) NULL,
+    [CreatedBy] NVARCHAR(450) NOT NULL,
     [UpdatedAt] DATETIME2 NULL,
     [UpdatedBy] NVARCHAR(450) NULL,
     CONSTRAINT PK_Product_Id PRIMARY KEY ([Id]),
