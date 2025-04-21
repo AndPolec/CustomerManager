@@ -1,4 +1,5 @@
-﻿using CustomerManager.Domain.Common.Validators;
+﻿using CustomerManager.Domain.Common.BaseTypes;
+using CustomerManager.Domain.Common.Validators;
 using CustomerManager.Domain.Models.Customer.Exceptions;
 using CustomerManager.Domain.Models.UserProfile.Exceptions;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CustomerManager.Domain.Models.Customer
 {
-    public class ContactPerson
+    public class ContactPerson: AuditableEntity
     {
         public int Id { get; private set; }
         public string FirstName { get; private set; }
@@ -17,11 +18,7 @@ namespace CustomerManager.Domain.Models.Customer
         public string? PhoneNumber { get; private set; }
         public string? Email { get; private set; }
         public int? RoleId { get; private set; }
-        public DateTime CreatedAt { get; private set; }
-        public string CreatedBy { get; private set; }
-        public DateTime? UpdatedAt { get; private set; }
-        public string? UpdatedBy { get; private set; }
-
+        
         internal ContactPerson(
             string firstName,
             string lastName,
@@ -32,12 +29,16 @@ namespace CustomerManager.Domain.Models.Customer
         {
             if (string.IsNullOrWhiteSpace(firstName))
                 throw new InvalidContactPersonException("First name is required.");
+
             if (string.IsNullOrWhiteSpace(lastName))
                 throw new InvalidContactPersonException("Last name is required.");
+
             if (string.IsNullOrWhiteSpace(createdBy))
                 throw new InvalidContactPersonException("CreatedBy is required.");
+
             if (email != null)
                 email = EmailValidator.CleanAndValidate(email, () => new InvalidContactPersonException("Invalid email format."));
+
             if (phoneNumber != null)
                 phoneNumber = PhoneNumberValidator.CleanAndValidate(phoneNumber, () => new InvalidContactPersonException("Invalid phone number format."));
 
@@ -46,16 +47,17 @@ namespace CustomerManager.Domain.Models.Customer
             Email = email;
             PhoneNumber = phoneNumber;
             RoleId = roleId;
-            CreatedAt = DateTime.UtcNow;
-            CreatedBy = createdBy;
+            SetCreated(createdBy);
         }
 
         internal void UpdateContactInfo(string? email, string? phoneNumber, string updatedBy)
         {
             if (string.IsNullOrWhiteSpace(updatedBy))
                 throw new InvalidContactPersonException("UpdatedBy is required.");
+
             if (email != null)
                 email = EmailValidator.CleanAndValidate(email, () => new InvalidContactPersonException("Invalid email format."));
+
             if (phoneNumber != null)
                 phoneNumber = PhoneNumberValidator.CleanAndValidate(phoneNumber, () => new InvalidContactPersonException("Invalid phone number format."));
 
@@ -68,8 +70,10 @@ namespace CustomerManager.Domain.Models.Customer
         {
             if (string.IsNullOrWhiteSpace(firstName))
                 throw new InvalidContactPersonException("First name is required.");
+
             if (string.IsNullOrWhiteSpace(lastName))
                 throw new InvalidContactPersonException("Last name is required.");
+
             if (string.IsNullOrWhiteSpace(updatedBy))
                 throw new InvalidContactPersonException("UpdatedBy is required.");
 
@@ -82,6 +86,7 @@ namespace CustomerManager.Domain.Models.Customer
         {
             if (roleId <= 0)
                 throw new InvalidContactPersonException("Role ID is invalid.");
+
             if (string.IsNullOrWhiteSpace(updatedBy))
                 throw new InvalidContactPersonException("UpdatedBy is required.");
 
@@ -94,12 +99,6 @@ namespace CustomerManager.Domain.Models.Customer
             if (id <= 0)
                 throw new InvalidContactPersonException("ID must be greater than 0.");
             Id = id;
-        }
-
-        private void Touch(string updatedBy)
-        {
-            UpdatedAt = DateTime.UtcNow;
-            UpdatedBy = updatedBy;
         }
     }
 }

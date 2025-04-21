@@ -1,4 +1,5 @@
-﻿using CustomerManager.Domain.Models.Customer.Exceptions;
+﻿using CustomerManager.Domain.Common.BaseTypes;
+using CustomerManager.Domain.Models.Customer.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,38 +8,36 @@ using System.Threading.Tasks;
 
 namespace CustomerManager.Domain.Models.Customer
 {
-    public class CustomerNote
+    public class CustomerNote: AuditableEntity
     {
         public int Id { get; private set; }
         public string Note { get; private set; }
-        public DateTime CreatedAt { get; private set; }
-        public string CreatedBy { get; private set; }
-        public DateTime? UpdatedAt { get; private set; }
-
-
+       
         internal CustomerNote(string note, string createdBy)
         {
             if (String.IsNullOrWhiteSpace(note))
                 throw new InvalidCustomerNoteException("Note cannot be empty.");
+
             if (String.IsNullOrWhiteSpace(createdBy))
-                throw new InvalidCustomerNoteException("CreatedBy cannot be empty.");
+                throw new InvalidCustomerNoteException("CreatedBy is required.");
 
             Note = note;
-            CreatedBy = createdBy;
-            CreatedAt = DateTime.UtcNow;
+            SetCreated(createdBy);
         }
 
-        internal void Update(string note,string updatedBy)
+        internal void Update(string note, string updatedBy)
         {
             if (String.IsNullOrWhiteSpace(note))
                 throw new InvalidCustomerNoteException("Note cannot be empty.");
+
             if (string.IsNullOrWhiteSpace(updatedBy))
-                throw new InvalidCustomerNoteException("UpdatedBy cannot be empty.");
+                throw new InvalidCustomerNoteException("UpdatedBy is required.");
+
             if (!string.Equals(updatedBy,CreatedBy, StringComparison.Ordinal))
                 throw new CustomerNoteAccessDeniedException("Only the author can update this note.");
 
             Note = note;
-            UpdatedAt = DateTime.UtcNow;
+            Touch(updatedBy);
         }
 
         internal void SetId(int id)

@@ -1,4 +1,5 @@
-﻿using CustomerManager.Domain.Models.Customer.Exceptions;
+﻿using CustomerManager.Domain.Common.BaseTypes;
+using CustomerManager.Domain.Models.Customer.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CustomerManager.Domain.Models.Customer
 {
-    public class Address
+    public class Address: AuditableEntity
     {
         public int Id { get; private set; }
         public string Street { get; private set; }
@@ -16,10 +17,6 @@ namespace CustomerManager.Domain.Models.Customer
         public string City { get; private set; }
         public string ZipCode { get; private set; }
         public string Country { get; private set; }
-        public DateTime CreatedAt { get; private set; }
-        public string CreatedBy { get; private set; }
-        public DateTime? UpdatedAt { get; private set; }
-        public string? UpdatedBy { get; private set; }
 
         internal Address(
            string street,
@@ -32,14 +29,19 @@ namespace CustomerManager.Domain.Models.Customer
         {
             if (string.IsNullOrWhiteSpace(street))
                 throw new InvalidAddressException("Street is required.");
+
             if (string.IsNullOrWhiteSpace(buildingNumber))
                 throw new InvalidAddressException("Building number is required.");
+
             if (string.IsNullOrWhiteSpace(city))
                 throw new InvalidAddressException("City is required.");
+
             if (string.IsNullOrWhiteSpace(zipCode))
                 throw new InvalidAddressException("Zip code is required.");
+
             if (string.IsNullOrWhiteSpace(country))
                 throw new InvalidAddressException("Country is required.");
+
             if (string.IsNullOrWhiteSpace(createdBy))
                 throw new InvalidAddressException("CreatedBy is required.");
 
@@ -49,8 +51,7 @@ namespace CustomerManager.Domain.Models.Customer
             City = city;
             ZipCode = zipCode;
             Country = country;
-            CreatedAt = DateTime.UtcNow;
-            CreatedBy = createdBy;
+            SetCreated(createdBy);
         }
 
         internal void Update(
@@ -64,14 +65,19 @@ namespace CustomerManager.Domain.Models.Customer
         {
             if (string.IsNullOrWhiteSpace(street))
                 throw new InvalidAddressException("Street is required.");
+
             if (string.IsNullOrWhiteSpace(buildingNumber))
                 throw new InvalidAddressException("Building number is required.");
+
             if (string.IsNullOrWhiteSpace(city))
                 throw new InvalidAddressException("City is required.");
+
             if (string.IsNullOrWhiteSpace(zipCode))
                 throw new InvalidAddressException("Zip code is required.");
+
             if (string.IsNullOrWhiteSpace(country))
                 throw new InvalidAddressException("Country is required.");
+
             if (string.IsNullOrWhiteSpace(updatedBy))
                 throw new InvalidAddressException("UpdatedBy is required.");
 
@@ -81,8 +87,7 @@ namespace CustomerManager.Domain.Models.Customer
             City = city;
             ZipCode = zipCode;
             Country = country;
-            UpdatedAt = DateTime.UtcNow;
-            UpdatedBy = updatedBy;
+            Touch(updatedBy);
         }
 
         internal void SetId(int id)

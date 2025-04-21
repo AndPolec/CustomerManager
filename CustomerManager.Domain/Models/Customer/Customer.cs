@@ -1,4 +1,5 @@
-﻿using CustomerManager.Domain.Common.Validators;
+﻿using CustomerManager.Domain.Common.BaseTypes;
+using CustomerManager.Domain.Common.Validators;
 using CustomerManager.Domain.Models.Customer.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CustomerManager.Domain.Models.Customer
 {
-    public class Customer
+    public class Customer: AuditableEntity
     {
         public int Id { get; private set; }
         public string? Email { get; private set; }
@@ -19,10 +20,6 @@ namespace CustomerManager.Domain.Models.Customer
         public int CustomerTypeId { get; private set; }
         public int CustomerPotentialId { get; private set; }
         public int CustomerActivityId { get; private set; }
-        public DateTime CreatedAt { get; private set; }
-        public string CreatedBy { get; private set; }
-        public DateTime? UpdatedAt { get; private set; }
-        public string? UpdatedBy { get; private set; }
 
         private readonly List<Address> _addresses = new();
         public IReadOnlyCollection<Address> Addresses => _addresses.AsReadOnly();
@@ -48,14 +45,19 @@ namespace CustomerManager.Domain.Models.Customer
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new InvalidCustomerException("Customer name is required.");
+
             if (string.IsNullOrWhiteSpace(assignedUserId))
                 throw new InvalidCustomerException("Assigned user ID is required.");
+
             if (customerTypeId <= 0)
                 throw new InvalidCustomerException("Customer type ID must be greater than 0.");
+
             if (customerPotentialId <= 0)
                 throw new InvalidCustomerException("Customer potential ID must be greater than 0.");
+
             if (customerActivityId <= 0)
                 throw new InvalidCustomerException("Customer activity ID must be greater than 0.");
+
             if (string.IsNullOrWhiteSpace(createdBy))
                 throw new InvalidCustomerException("CreatedBy is required.");
 
@@ -66,15 +68,18 @@ namespace CustomerManager.Domain.Models.Customer
             CustomerTypeId = customerTypeId;
             CustomerPotentialId = customerPotentialId;
             CustomerActivityId = customerActivityId;
-            CreatedBy = createdBy;
-            CreatedAt = DateTime.UtcNow;
             IsActive = true;
+            Touch(createdBy);
         }
 
         public void UpdateName(string name, string updatedBy)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new InvalidCustomerException("Name is required.");
+
+            if (string.IsNullOrWhiteSpace(updatedBy))
+                throw new InvalidCustomerException("UpdatedBy is required.");
+
             Name = name;
             Touch(updatedBy);
         }
@@ -158,14 +163,6 @@ namespace CustomerManager.Domain.Models.Customer
         {
             IsActive = false;
             Touch(updatedBy);
-        }
-
-        private void Touch(string updatedBy)
-        {
-            if (string.IsNullOrWhiteSpace(updatedBy))
-                throw new InvalidCustomerException("UpdatedBy is required.");
-            UpdatedBy = updatedBy;
-            UpdatedAt = DateTime.UtcNow;
         }
     }
 }

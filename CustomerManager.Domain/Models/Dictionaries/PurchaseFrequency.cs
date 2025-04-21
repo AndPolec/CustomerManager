@@ -1,4 +1,5 @@
-﻿using CustomerManager.Domain.Models.Dictionaries.Exceptions;
+﻿using CustomerManager.Domain.Common.BaseTypes;
+using CustomerManager.Domain.Models.Dictionaries.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CustomerManager.Domain.Models.Dictionaries
 {
-    public class PurchaseFrequency
+    public class PurchaseFrequency: AuditableEntity
     {
         public int Id { get; private set; }
 
@@ -15,11 +16,7 @@ namespace CustomerManager.Domain.Models.Dictionaries
 
         public int MultiplierInDays { get; private set; }
 
-        public DateTime CreatedAt { get; private set; }
-
-        public string? CreatedBy { get; private set; }
-
-        public PurchaseFrequency(int id, string name, int multiplierInDays, string? createdBy = null)
+        public PurchaseFrequency(string name, int multiplierInDays, string createdBy )
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new InvalidPurchaseFrequencyException("Purchase frequency name cannot be empty.");
@@ -27,27 +24,36 @@ namespace CustomerManager.Domain.Models.Dictionaries
             if (multiplierInDays <= 0)
                 throw new InvalidPurchaseFrequencyException("Multiplier in days must be greater than zero.");
 
-            Id = id;
+            if (string.IsNullOrWhiteSpace(createdBy))
+                throw new InvalidPurchaseFrequencyException("CreatedBy is required.");
+
             Name = name;
             MultiplierInDays = multiplierInDays;
-            CreatedAt = DateTime.UtcNow;
-            CreatedBy = createdBy;
+            SetCreated(createdBy);
         }
 
-        public void UpdateName(string newName)
+        public void UpdateName(string newName, string updatedBy)
         {
             if (string.IsNullOrWhiteSpace(newName))
                 throw new InvalidPurchaseFrequencyException("Purchase frequency name cannot be empty.");
 
+            if (string.IsNullOrWhiteSpace(updatedBy))
+                throw new InvalidPurchaseFrequencyException("UpdatedBy is required.");
+
             Name = newName;
+            Touch(updatedBy);
         }
 
-        public void UpdateMultiplierInDays(int newMultiplierInDays)
+        public void UpdateMultiplierInDays(int newMultiplierInDays, string updatedBy)
         {
             if (newMultiplierInDays <= 0)
                 throw new InvalidPurchaseFrequencyException("Multiplier in days must be greater than zero.");
 
+            if (string.IsNullOrWhiteSpace(updatedBy))
+                throw new InvalidPurchaseFrequencyException("UpdatedBy is required.");
+
             MultiplierInDays = newMultiplierInDays;
+            Touch(updatedBy);
         }
     }
 }
