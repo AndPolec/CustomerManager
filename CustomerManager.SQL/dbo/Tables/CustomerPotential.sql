@@ -8,7 +8,8 @@
     [UpdatedAt] DATETIME2 NULL,
     [UpdatedBy] NVARCHAR(450) NULL,
     CONSTRAINT PK_CustomerPotential_Id PRIMARY KEY ([Id]),
-    CONSTRAINT FK_CustomerPotential_AspNetUsers_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE NO ACTION
+    CONSTRAINT FK_CustomerPotential_AspNetUsers_CreatedBy FOREIGN KEY ([CreatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE NO ACTION,
+    CONSTRAINT FK_CustomerPotential_AspNetUsers_UpdatedBy FOREIGN KEY ([UpdatedBy]) REFERENCES [AspNetUsers]([Id]) ON DELETE NO ACTION
 )
 
 GO

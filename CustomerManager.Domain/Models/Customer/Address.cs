@@ -11,14 +11,14 @@ namespace CustomerManager.Domain.Models.Customer
     {
         public int Id { get; private set; }
         public string Street { get; private set; }
-        public string BuildingNumber { get; private set; } 
+        public string BuildingNumber { get; private set; }
         public string? FlatNumber { get; private set; }
         public string City { get; private set; }
-        public string ZipCode { get; private set; } 
-        public string Country { get; private set; } 
+        public string ZipCode { get; private set; }
+        public string Country { get; private set; }
         public DateTime CreatedAt { get; private set; }
-        public string? CreatedBy { get; private set; }
-        public DateTime? UpdatedAt { get; set; }
+        public string CreatedBy { get; private set; }
+        public DateTime? UpdatedAt { get; private set; }
         public string? UpdatedBy { get; private set; }
 
         internal Address(
@@ -27,8 +27,8 @@ namespace CustomerManager.Domain.Models.Customer
            string city,
            string zipCode,
            string country,
-           string? flatNumber = null,
-           string? createdBy = null)
+           string createdBy,
+           string? flatNumber = null)
         {
             if (string.IsNullOrWhiteSpace(street))
                 throw new InvalidAddressException("Street is required.");
@@ -40,6 +40,8 @@ namespace CustomerManager.Domain.Models.Customer
                 throw new InvalidAddressException("Zip code is required.");
             if (string.IsNullOrWhiteSpace(country))
                 throw new InvalidAddressException("Country is required.");
+            if (string.IsNullOrWhiteSpace(createdBy))
+                throw new InvalidAddressException("CreatedBy is required.");
 
             Street = street;
             BuildingNumber = buildingNumber;
@@ -57,8 +59,8 @@ namespace CustomerManager.Domain.Models.Customer
             string city,
             string zipCode,
             string country,
-            string? flatNumber = null,
-            string? updatedBy = null)
+            string updatedBy,
+            string? flatNumber = null)
         {
             if (string.IsNullOrWhiteSpace(street))
                 throw new InvalidAddressException("Street is required.");
@@ -70,6 +72,8 @@ namespace CustomerManager.Domain.Models.Customer
                 throw new InvalidAddressException("Zip code is required.");
             if (string.IsNullOrWhiteSpace(country))
                 throw new InvalidAddressException("Country is required.");
+            if (string.IsNullOrWhiteSpace(updatedBy))
+                throw new InvalidAddressException("UpdatedBy is required.");
 
             Street = street;
             BuildingNumber = buildingNumber;
